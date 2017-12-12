@@ -1,2 +1,3 @@
-# udemy-python-ecomm
+# Python Ecommerce
+
 Python Django Ecommerce
