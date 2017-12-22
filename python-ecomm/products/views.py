@@ -63,6 +63,25 @@ class ProductDetailView(DetailView):
     #     return Product.objects.filter(pk=pk)
 
 
+class ProductDetailSlugView(DetailView):
+    queryset = Product.objects.all()
+    template_name = "products/detail.html"
+
+    def get_object(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        # product = get_object_or_404(Product, slug=slug, active=True)
+        try:
+            product = Product.objects.get(slug=slug, active=True)
+        except Product.DoesNotExist:
+            raise Http404("Not found")
+        except Product.MultipleObjectsReturned:
+            queryset = Product.objects.filter(slug=slug, active=True)
+            product = queryset.first()
+        except:
+            raise Http404("* Thinking *")
+        return product
+
+
 def product_detail_view(request, pk=None, *args, **kwargs):
     # product = Product.objects.get(pk=pk)
     # product = get_object_or_404(Product, pk=pk)
