@@ -1,0 +1,20 @@
+<div class="card" style="width: 20rem;">
+    {% if product.image %}
+        <a href="{{ product.get_absolute_url }}">
+            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.title }} logo">
+        </a>
+    {% endif %}
+    <div class="card-body">
+        <h4 class="card-title">{{ product.title }}</h4>
+        <p class="card-text">{{ product.description|linebreaks|truncatewords:15 }}<p>
+        <a class="btn btn-primary" href="{{ product.get_absolute_url }}">
+           View
+        </a>
+        <!--
+        <a class="btn btn-warning" href="{% url 'products:detail' slug=product.slug %}">
+           URL Shortcut
+        </a>
+        -->
+    </div>
+</div>
+
